@@ -1,3 +1,5 @@
+### DATA GENERATION AND VISUALIZATION
+
 
 import pandas as pd
 import numpy as np
@@ -135,6 +137,15 @@ normal_array
 random_data = np.random.randint(0, 100, size=50)  # 50 random integers between 0 and 100
 print(random_data)
 
+# generate uniform data
+random_data=np.random.uniform(20,30)
+print(random_data)
+
+#generate a random element from non empty sequnce using random.choice()
+items=['one', 'two', 'three' 'four' ,'five']
+items=np.random.choice(items)
+print(items)
+
 # Generate data following a normal distribution
 normal_data = np.random.normal(loc=50, scale=10, size=100)  # Mean 50, std 10
 print(normal_data)
@@ -185,10 +196,47 @@ large_data = pd.DataFrame({
 print(large_data)
 
 
-
+#DATA VISUALIZATION
 # Line plot
-plt.plot(random_data)
+x=[1,2,3,4,5]
+y=[18,37,57,39,58]
+plt.plot(x ,y)
+
+
+x=[1,2,3,4,5]
+y=[10,40,20,40,50]
+plt.plot(x ,y)
 plt.title('Line Plot')
+plt.show()
+
+x=[1,2,3,4,5]
+y=[18,37,57,39,58]
+plt.subplot(2,2,1)
+plt.plot(x ,y)
+plt.title("axis 1")
+
+
+
+x=[1,2,3,4,5]
+y=[10,40,20,40,50]
+plt.subplot(2,2,2)
+plt.plot(x, y)
+plt.title("axis 2")
+
+x=[1,2,3,4,5]
+y=[10,30,10,40,30]
+plt.subplot(2,2,3)
+plt.scatter(x,y)
+plt.title("axis 3")
+
+
+x=[1,2,3,4,5]
+y=[37,46,38,49,10]
+plt.subplot(2,2,4)
+plt.bar(x, y)
+plt.title("axis 4")
+
+plt.suptitle("Super Title")
 plt.show()
 
 # Histogram
@@ -197,46 +245,91 @@ plt.hist(normal_data, bins=10, color='blue', alpha=0.5)
 plt.title('Histogram')
 plt.show()
 
+import seaborn as sns
+
+# Scatter plot
+sns.scatterplot(x=large_data['A'], y=large_data['B'])
+plt.title('Scatter Plot')
+plt.show()
 
 
-# Font dictionary
-colour = {
+from numpy import array
+
+font_create = {
     'color': 'blue',
-    'fontname': 'Times New Roman',
-    'size': 18
+    'font': 'Times New Roman',
+    'size': 10
 }
 
 x_axis = np.array([10, 50])
-y_axis = np.array([5, 400])
+y_axis = np.array([25, 400])
 
-# First plot with markers
-plt.plot(x_axis, y_axis, marker='o', ms=10, mec='red', mfc='k')
-
-# Second plot (adding a straight line for illustration)
-plt.plot(x_axis, y_axis)
-
-# Title
-plt.title('DATA VISUALIZATION', fontdict=colour, loc='center')
-
+# plt.plot(x_axis, y_axis '*', ms=20, mec='red', mfc='black)
+plt.subplot(2,3,4)
+plt.plot(x_axis, y_axis, ls='dashdot', c='r', lw=3.0)
+plt.title('DATA VISUALIZATION', fontdict=font_create, loc='center')
 # Labels with correct font dictionary
-plt.ylabel('Height', fontdict={'color': 'blue', 'size': 14})
-plt.xlabel('Age', fontdict={'color': 'red', 'size': 13})
+plt.ylabel('Height', fontdict={'color': 'blue', 'size': 13})
+plt.xlabel('Age', fontdict={'color': 'green', 'size': 13})
+plt.grid(lw=2.0,c='k')
 
-# Show the plot
+
+# Data for the first plot
+x = np.array([20, 150])
+y = np.array([50, 350])
+
+# Data for the second plot
+xdata = np.array([20, 40, 14, 2])
+ydata = np.array([11, 20, 10, 50])
+
+# Subplot configuration
+plt.subplot(2, 3, 1)  # Subplot position in a 2x3 grid
+plt.plot(x, y, label='Line 1', color='blue', lw=2.0)  # Plot 1: Line with custom style
+plt.plot(xdata, ydata, marker='*', label='Line 2', color='green', linestyle='dashed')  # Plot 2: Line with markers
+plt.title('PLOT 1')  # Title of the subplot
+plt.xlabel('X-Axis')  # X-axis label
+plt.ylabel('Y-Axis')  # Y-axis label
+plt.grid(axis='x', c='red', lw=2.0)  # Grid lines for the x-axis
+plt.legend()  # Add legend for better interpretation
+plt.tight_layout()  # Adjust layout to prevent overlaps
 plt.show()
 
-temp = np.array([1,2,3,4,5])
-pressure = temp * 2 + 5
-pressure
 
-plt.plot(temp,pressure)
-plt.xlabel('Temperature in oC')
-plt.ylabel('Pressure in atm')
-plt.title('Temperature vs Pressure')
-plt.xticks(np.arange(0, 6, step=0.5))
+#plot 3
+x_point=np.array([20,150])
+y_point=np.array([50,320])
+plt.subplot(2,3,1)
+plt.plot(x_point,y_point, marker='*')
+plt.title('PLOT 2')
+
+#plot 4
+x2=np.array([20,150])
+y1=np.array([50,320])
+plt.subplot(2,3,2)
+plt.plot(x2,y1, ls='dotted', lw=2.0, marker='*', c='green')
+plt.title('PLOT 3')
+
+
+#plot 5
+#A student grade and total number of student as a bar chart
+student_grade=np.array(['A','B','C','E','F'])
+number_of_student=np.array([50,320,15,24,2])
+plt.subplot(2,3,4)
+plt.bar(student_grade, number_of_student, color='red')
+plt.xlabel('student grade')
+plt.ylabel('number of students')
 plt.show()
 
+# plot 6
+pie_y = [40, 30, 20, 10]
+label_data = ['English', 'Maths ', 'Physics ', 'Computer Science']
+# Pie chart
+plt.pie(pie_y, labels=label_data, autopct='%1.1f%%', startangle=90)
 
+# Title and display
+plt.title('Pie Chart')
+plt.suptitle('DATA VISUALIZATION', c='r')
+plt.show()
 
 
 
